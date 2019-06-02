@@ -6,18 +6,14 @@ import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'react-router-redux';
 import {Route, Switch} from 'react-router';
 import App from "./components/app";
-import LoginForm from "./components/LoginForm";
 
 const store = createStore(
-   state => state
+    state => state
 );
 const history = createHistory();
 
 ReactDOM.render(<Provider store={store}>
     <ConnectedRouter history={history}>
-        <Switch>
-            <Route path="/login" component={LoginForm}/>
-            <Route path="/" component={App}/>
-        </Switch>
+        <Route path="/" component={App}/>
     </ConnectedRouter>
 </Provider>, document.getElementById('root'));
