@@ -2,6 +2,7 @@ import React from 'react';
 import BlogPostList from "./BlogPostList";
 import {blogPostList, blogPostListAdd} from "../actions/actions";
 import {connect} from "react-redux";
+import {requests as request} from "../agent";
 
 const mapStateToProps = state => ({
     ...state.blogPostList
@@ -14,7 +15,8 @@ const mapDispatchToProps = {
 
 class BlogPostListContainer extends React.Component {
     componentDidMount(){
-        console.log(this.props);
+        request.get('/blog_posts').then(response => console.log(response));
+        setTimeout(this.props.blogPostListAdd, 10000);
         this.props.blogPostList();
     }
     render() {
