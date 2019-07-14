@@ -1,13 +1,18 @@
 import React from 'react';
+import blogPostList from "../reducers/blogPostList";
 
 class BlogPostList extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log(props);
-    }
-
     render() {
-        const {posts} = this.props;
+        const {posts, isFetching} = this.props;
+
+        if (isFetching){
+            return(<div><i className="fa fa-spinner fa-spin"></i></div>);
+        }
+
+        if (null === posts ||  0 === posts.length){
+            return(<div>No blogPost to see here</div>);
+        }
+
         return (
             <div>
                 <ul>
