@@ -5,7 +5,7 @@ import history from "./history";
 import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'react-router-redux';
 import {Route} from 'react-router';
-import App from "./components/app";
+import App from "./components/App";
 import reducer from "./reducer";
 import thunkMiddleWare from "redux-thunk";
 
