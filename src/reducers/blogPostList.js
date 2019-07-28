@@ -1,7 +1,7 @@
 import {
     BLOG_POST_LIST_ADD, BLOG_POST_LIST_ERROR, BLOG_POST_LIST_RECEIVED,
     BLOG_POST_LIST_REQUEST
-} from "../actions/actions";
+} from "../actions/constants";
 
 export default (state={
     posts:null,

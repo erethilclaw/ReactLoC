@@ -1,9 +1,9 @@
 import {requests} from "../agent";
-
-export const BLOG_POST_LIST_REQUEST = 'BLOG_POST_LIST_REQUEST';
-export const BLOG_POST_LIST_RECEIVED = 'BLOG_POST_LIST_ADD_RECEIVED';
-export const BLOG_POST_LIST_ERROR = 'BLOG_POST_LIST_ERROR';
-export const BLOG_POST_LIST_ADD = 'BLOG_POST_LIST_ADD';
+import {
+    BLOG_POST_ERROR,
+    BLOG_POST_LIST_ADD, BLOG_POST_LIST_ERROR, BLOG_POST_LIST_RECEIVED, BLOG_POST_LIST_REQUEST, BLOG_POST_RECEIVED,
+    BLOG_POST_REQUEST
+} from "./constants";
 
 export const blogPostListRquest = () => ({
     type: BLOG_POST_LIST_REQUEST,
@@ -25,6 +25,30 @@ export const blogPostListFetch = () => {
         return requests.get('/blog_posts')
             .then(response => dispatch(blogPostListRecieved(response)))
             .catch(error => dispatch(blogPostListError(error)));
+    }
+};
+
+export const blogPostRequest = () => ({
+   type: BLOG_POST_REQUEST,
+
+});
+
+export const blogPostError = (error) => ({
+    type: BLOG_POST_ERROR,
+    error
+});
+
+export const blogPostRecieved = (data) => ({
+    type: BLOG_POST_RECEIVED,
+    data
+});
+
+export const blogPostFetch = (id) => {
+    return (dispatch) => {
+        dispatch(blogPostRequest());
+        return requests.get(`/blog_posts/${id}`)
+            .then(response => dispatch(blogPostRecieved(response)))
+            .catch(error => dispatch(blogPostError(error)));
     }
 };
 
