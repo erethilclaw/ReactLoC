@@ -1,25 +1,27 @@
 import React from 'react';
-import {blogPostFetch} from "../actions/actions";
+import {blogPostFetch, blogPostUnload} from "../actions/actions";
 import {connect} from "react-redux";
+import {BlogPost} from "./BlogPost";
 
 const mapeStateToProps = state => ({
     ...state.blogPost
 });
 
 const mapDispatchToProps = {
-    blogPostFetch
+    blogPostFetch,
+    blogPostUnload
 };
 
 class BlogPostContainer extends React.Component {
     componentDidMount() {
-        console.log(this.props);
-        console.log(this.props.match.params.id);
-        this.props.blogPostFetch(this.props.match.params.id).then(_ => console.log(this.props.post));
+        this.props.blogPostFetch(this.props.match.params.id);
+    }
+    componenWillUnmount() {
+        this.props.blogPostUnload();
     }
     render() {
-        return(
-            <div>hello post individual</div>
-        )
+        const{isFetching, post} = this.props;
+        return(<BlogPost isFetching={isFetching} post={post}/>)
     }
 }
 

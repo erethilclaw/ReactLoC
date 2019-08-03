@@ -2,7 +2,7 @@ import {requests} from "../agent";
 import {
     BLOG_POST_ERROR,
     BLOG_POST_LIST_ADD, BLOG_POST_LIST_ERROR, BLOG_POST_LIST_RECEIVED, BLOG_POST_LIST_REQUEST, BLOG_POST_RECEIVED,
-    BLOG_POST_REQUEST
+    BLOG_POST_REQUEST, BLOG_POST_UNLOAD
 } from "./constants";
 
 export const blogPostListRquest = () => ({
@@ -41,6 +41,11 @@ export const blogPostError = (error) => ({
 export const blogPostRecieved = (data) => ({
     type: BLOG_POST_RECEIVED,
     data
+});
+
+export const blogPostUnload = () => ({
+    type: BLOG_POST_UNLOAD,
+
 });
 
 export const blogPostFetch = (id) => {
