@@ -1,17 +1,19 @@
 import React from 'react';
 import timeago from 'timeago.js';
 import {Link} from 'react-router-dom';
+import Spinner from "./Spinner";
+import Message from "./Message";
 
 class BlogPostList extends React.Component {
     render() {
         const {posts, isFetching} = this.props;
 
         if (isFetching) {
-            return (<div><i className="fa fa-spinner fa-spin"></i></div>);
+            return (<Spinner/>);
         }
 
         if (null === posts || 0 === posts.length) {
-            return (<div>No blogPost to see here</div>);
+            return (<Message message="No blogposts to show"/>);
         }
 
         return (<div>
