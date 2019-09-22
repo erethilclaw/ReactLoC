@@ -87,6 +87,16 @@ export const commentListFetch = (id) => {
     }
 };
 
+export const userLoginAttempt = (username, password) => {
+    return (dispatch) => {
+        return requests.post('/login_check', {username, password}).then(
+            response => console.log(response)
+        ).catch(error => {
+            console.log('login failed');
+        });
+    }
+};
+
 export const blogPostAdd = () => ({
     type: BLOG_POST_LIST_ADD,
     data: {
