@@ -8,8 +8,11 @@ import {Route} from 'react-router';
 import App from "./components/App";
 import reducer from "./reducer";
 import thunkMiddleWare from "redux-thunk";
+import {tokenMiddleWare} from "./middleware";
 
-const store = createStore(reducer, applyMiddleware(thunkMiddleWare));
+const store = createStore(reducer,
+    applyMiddleware(thunkMiddleWare, tokenMiddleWare)
+);
 
 ReactDOM.render(<Provider store={store}>
     <ConnectedRouter history={history}>
