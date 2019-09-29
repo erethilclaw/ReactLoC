@@ -8,7 +8,7 @@ const responseBody = response => response.body;
 let token = null;
 
 const tokenPlugin = (request) => {
-    request.set('Authoritzation',`Bearer.${token}`)
+    request.set('Authorization',`Bearer.${token}`);
 };
 
 export const requests = {
@@ -16,5 +16,5 @@ export const requests = {
         superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
     post: (url, body = null) =>
         superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
-    setToken: (newJwtToken) => token => newJwtToken
+    setToken: (newJwtToken) => token = newJwtToken
 };
