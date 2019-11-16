@@ -4,9 +4,19 @@ import {Route, Switch} from "react-router";
 import BlogPostListContainer from "./BlogPostListContainer";
 import Header from "./Header";
 import BlogPostContainer from "./BlogPostContainer";
+import {requests} from "../agent";
 
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        const token = window.localStorage.getItem('jwtToken');
+
+        if (token){
+            requests.setToken(token);
+        }
+    }
+
     render() {
         return (
             <div>
