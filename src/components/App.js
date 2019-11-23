@@ -6,10 +6,15 @@ import Header from "./Header";
 import BlogPostContainer from "./BlogPostContainer";
 import {requests} from "../agent";
 import {connect} from 'react-redux';
+import {userProfileFetch} from "../actions/actions";
 
 const mapsStateToProps = state => ({
     ...state.auth
 });
+
+const mapDispatchToProps = {
+    userProfileFetch
+};
 
 class App extends React.Component {
     constructor(props) {
@@ -18,6 +23,16 @@ class App extends React.Component {
 
         if (token){
             requests.setToken(token);
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        const {userId, userProfileFetch} = this.props;
+
+        if (prevProps.userId !== userId && userId !== null) {
+            console.log(`Old user id ${prevProps.userId}`);
+            console.log(`New user id ${userId}`);
+            userProfileFetch(userId);
         }
     }
 
@@ -36,4 +51,4 @@ class App extends React.Component {
     }
 }
 
-export default connect(mapsStateToProps, null)(App);
+export default connect(mapsStateToProps, mapDispatchToProps)(App);
