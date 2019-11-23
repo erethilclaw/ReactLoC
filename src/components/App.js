@@ -5,7 +5,11 @@ import BlogPostListContainer from "./BlogPostListContainer";
 import Header from "./Header";
 import BlogPostContainer from "./BlogPostContainer";
 import {requests} from "../agent";
+import {connect} from 'react-redux';
 
+const mapsStateToProps = state => ({
+    ...state.auth
+});
 
 class App extends React.Component {
     constructor(props) {
@@ -18,9 +22,10 @@ class App extends React.Component {
     }
 
     render() {
+        const {isAuthenticated} = this.props;
         return (
             <div>
-                <Header/>
+                <Header isAuthenticated={isAuthenticated}/>
                 <Switch>
                     <Route path="/login" component={LoginForm}/>
                     <Route path="/" exact component={BlogPostListContainer}/>
@@ -31,4 +36,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default connect(mapsStateToProps, null)(App);
