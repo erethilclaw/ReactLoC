@@ -6,14 +6,14 @@ import Header from "./Header";
 import BlogPostContainer from "./BlogPostContainer";
 import {requests} from "../agent";
 import {connect} from 'react-redux';
-import {userProfileFetch} from "../actions/actions";
+import {userProfileFetch, userSetId} from "../actions/actions";
 
 const mapsStateToProps = state => ({
     ...state.auth
 });
 
 const mapDispatchToProps = {
-    userProfileFetch
+    userProfileFetch, userSetId
 };
 
 class App extends React.Component {
@@ -23,6 +23,15 @@ class App extends React.Component {
 
         if (token){
             requests.setToken(token);
+        }
+    }
+
+    componentDidMount(){
+        const userId = window.localStorage.getItem('userId');
+        const {userSetId} = this.props;
+
+        if (userId) {
+            userSetId(userId);
         }
     }
 
@@ -37,10 +46,10 @@ class App extends React.Component {
     }
 
     render() {
-        const {isAuthenticated} = this.props;
+        const {isAuthenticated, userData} = this.props;
         return (
             <div>
-                <Header isAuthenticated={isAuthenticated}/>
+                <Header isAuthenticated={isAuthenticated} userData={userData}/>
                 <Switch>
                     <Route path="/login" component={LoginForm}/>
                     <Route path="/" exact component={BlogPostListContainer}/>
